@@ -45,7 +45,6 @@ while True :
             name = input('請輸入 : ')
             if name == 'r' or name == 'R':
                 break   
-
             elif name != 'r' or name != 'R':
                 while True:   
                     print('')      
@@ -68,7 +67,7 @@ while True :
                     print(Fore.GREEN +'你輸入的搜尋品項的主要搜尋的標籤為', list_display0)
                     print('')
                     while True:
-                        sheet = pd.read_excel(xlsx, sheet_name = None, index_col = None, header = headlistA)
+                        sheet = pd.read_excel(xlsx, sheet_name = None, index_col = 0, header = headlistA)
                         print('')
                         print(Fore.YELLOW +"{:=^100s}".format("次要標籤頁面"))
                         print('')
@@ -101,11 +100,11 @@ while True :
                                 print(Fore.CYAN +"{:=^108s}".format(""))
                                 print('')   
                                 for line in sheet:
-                                    df = pd.read_excel(xlsx, sheet_name = line, index_col = None,header = headlistA)
+                                    df = pd.read_excel(xlsx, sheet_name = line, index_col = 0,header = headlistA)
                                     try:
-                                        df = pd.read_excel(xlsx, sheet_name = line, index_col = None,header = headlistA)
+                                        df = pd.read_excel(xlsx, sheet_name = line, index_col = 0,header = headlistA)
                                         df = df.fillna(' ')
-                                        result = df[index_input0].str.contains(name)#將dataframe轉成文字比對name,得到布林值 
+                                        result = df[index_input0].str.contains(name, na=False)#將dataframe轉成文字比對name,得到布林值 
                                         filter_result = df[result]                  #用dataframe操作取出布林後之篩選結果
                                         final_result = filter_result[list_display0] 
                                         if final_result.empty :
